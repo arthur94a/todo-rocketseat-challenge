@@ -1,0 +1,6 @@
+.container {
+    width: 100%;
+    padding: 72px 24px 80px;
+    text-align: center;
+    background-color: var(--gray-700);
+}
