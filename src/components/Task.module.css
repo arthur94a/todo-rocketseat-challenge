@@ -1,0 +1,46 @@
+.task {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    border: 1px solid var(--gray-400);
+    gap: 1rem;
+    align-items: center;
+    padding: 16px;
+    background-color: var(--gray-500);
+}
+
+button {
+    padding: 0;
+    border: none;
+    background: transparent;
+    display: flex;
+    cursor: pointer;
+}
+
+.content {
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--gray-100);
+}
+
+.checkbox {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 2px solid var(--blue-200);
+}
+
+.checkbox:hover {
+    border-color: var(--blue-500);
+}
+
+.btn_delete:hover {
+    border-radius: 8px;
+    background-color: var(--gray-400);
+}
+
+.btn_delete:hover img {
+    filter: invert(49%) sepia(24%) saturate(4360%) hue-rotate(326deg) brightness(93%) contrast(89%);
+}

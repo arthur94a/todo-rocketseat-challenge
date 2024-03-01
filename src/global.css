@@ -19,7 +19,7 @@
 }
 
 body {
-  background-color: var(--gray-500);
+  background-color: var(--gray-600);
   color: var(--gray-300);
   -webkit-font-smoothing: antialiased;
 }
