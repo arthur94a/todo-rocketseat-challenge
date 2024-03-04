@@ -2,14 +2,15 @@ import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
 import styles from './InputTask.module.css'
 
 interface InputTaskProps {
-    taskList: (x: [string, number, boolean][]) => void,
-    attTaskList: [string, number, boolean][],
+    taskList: (x: [string, string, boolean][]) => void,
+    attTaskList: [string, string, boolean][],
 }
 
 export function InputTask({ taskList, attTaskList }: InputTaskProps) {
-    const [taskId, setTaskId] = useState<number>(1)
+    const [taskIdNumber, setTaskIdNumber] = useState<number>(1)
+    const [taskId, setTaskId] = useState<string>((new Date).toISOString() + taskIdNumber.toString())
     // const [taskComplete, setTaskComplete] = useState<boolean>(false)
-    const [taskItems, setTaskItems] = useState<[string, number, boolean][]>([]);
+    const [taskItems, setTaskItems] = useState<[string, string, boolean][]>([]);
     const [newTaskContent, setNewTaskContent] = useState<string>('');
 
     useEffect(() => {
@@ -24,7 +25,8 @@ export function InputTask({ taskList, attTaskList }: InputTaskProps) {
         event.preventDefault();
         
         if (newTaskContent !== '') {
-            setTaskId(taskId + 1);
+            setTaskIdNumber(taskIdNumber + 1)
+            setTaskId((new Date).toISOString() + taskIdNumber.toString());
             setNewTaskContent('');
             setTaskItems([...taskItems, [newTaskContent, taskId, false]])
             taskList([...taskItems, [newTaskContent, taskId, false]]);

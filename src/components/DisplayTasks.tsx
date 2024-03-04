@@ -4,9 +4,9 @@ import iconClipboard from '../assets/svg/clipboard.svg'
 import styles from './DisplayTasks.module.css'
 
 interface PropsDisplayTasks {
-    taskData: [string, number, boolean][],
-    deleteTask: (idTask: number) => void,
-    completeTask: (idTask: number) => void,
+    taskData: [string, string, boolean][],
+    deleteTask: (idTask: string) => void,
+    completeTask: (idTask: string) => void,
 }
 
 export function DisplayTasks({ taskData, deleteTask, completeTask }: PropsDisplayTasks) {
@@ -20,11 +20,11 @@ export function DisplayTasks({ taskData, deleteTask, completeTask }: PropsDispla
         setIsTaskEmpty(taskData.length !== 0 ? false : true)
     }, [taskData])
 
-    function getDeleteTaskId(idTask: number) {
+    function getDeleteTaskId(idTask: string) {
         deleteTask(idTask)
     }
 
-    function getTaskCompleteStatus(idTask: number) {
+    function getTaskCompleteStatus(idTask: string) {
         completeTask(idTask)
     }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Layout } from './components/Layout'
 import { InputTask } from "./components/InputTask";
 import { DisplayTasks } from './components/DisplayTasks';
@@ -6,17 +6,37 @@ import { DisplayTasks } from './components/DisplayTasks';
 import './global.css'
 
 export function App() {
-  const [tasks, setTasks] = useState<[string, number, boolean][]>([])
+  const [tasks, setTasks] = useState<[string, string, boolean][]>([])
 
-  function getterTaskList(taskList: [string, number, boolean][]) {
+  useEffect(() => {
+    try {
+      const tasksStorage = localStorage.getItem('taskList')
+      if (tasksStorage !== null) {
+        const taskParse = JSON.parse(tasksStorage)
+        setTasks(taskParse)
+      }
+    } 
+    catch(error) {
+      console.log(error)
+    }
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      const tasksStringify = JSON.stringify(tasks)
+      localStorage.setItem('taskList', tasksStringify)
+    }, 100)
+  }, [tasks])
+
+  function getterTaskList(taskList: [string, string, boolean][]) {
     setTasks(taskList)
   }
 
-  function deleteTask(idTask: number) {
+  function deleteTask(idTask: string) {
     setTasks(tasks.filter(task => task[1] !== idTask))
   }
   
-  function completeTask(idTask: number) {
+  function completeTask(idTask: string) {
     const changeTaskStatus = tasks.map(task => {
       if (task[1] === idTask) {
         task[2] = !task[2]

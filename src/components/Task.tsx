@@ -5,9 +5,9 @@ import styles from './Task.module.css'
 
 interface PropsTask {
     content: string,
-    id?: number,
-    getDeleteTaskId: (idTask: number) => void,
-    getTaskCompleteStatus: (idTask: number) => void,
+    id?: string,
+    getDeleteTaskId: (idTask: string) => void,
+    getTaskCompleteStatus: (idTask: string) => void,
 }
 
 export function Task({ content, id, getDeleteTaskId, getTaskCompleteStatus}: PropsTask) {
