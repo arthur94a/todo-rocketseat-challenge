@@ -4,7 +4,7 @@
     border-radius: 8px;
     border: 1px solid var(--gray-400);
     gap: 1rem;
-    align-items: center;
+    align-items: top;
     padding: 16px;
     background-color: var(--gray-500);
 }
@@ -40,6 +40,10 @@ button {
     border-color: var(--blue-500);
 }
 
+.btn_delete {
+    height: 24px;
+}
+
 .btn_delete:hover {
     border-radius: 8px;
     background-color: var(--gray-400);
@@ -47,4 +51,9 @@ button {
 
 .btn_delete:hover img {
     filter: invert(49%) sepia(24%) saturate(4360%) hue-rotate(326deg) brightness(93%) contrast(89%);
+}
+
+.complete p {
+    color: var(--gray-300);
+    text-decoration: line-through;
 }

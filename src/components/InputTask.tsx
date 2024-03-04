@@ -2,13 +2,14 @@ import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
 import styles from './InputTask.module.css'
 
 interface InputTaskProps {
-    taskList: (x: [string, number][]) => void,
-    attTaskList: [string, number][],
+    taskList: (x: [string, number, boolean][]) => void,
+    attTaskList: [string, number, boolean][],
 }
 
 export function InputTask({ taskList, attTaskList }: InputTaskProps) {
     const [taskId, setTaskId] = useState<number>(1)
-    const [taskItems, setTaskItems] = useState<[string, number][]>([]);
+    // const [taskComplete, setTaskComplete] = useState<boolean>(false)
+    const [taskItems, setTaskItems] = useState<[string, number, boolean][]>([]);
     const [newTaskContent, setNewTaskContent] = useState<string>('');
 
     useEffect(() => {
@@ -25,8 +26,8 @@ export function InputTask({ taskList, attTaskList }: InputTaskProps) {
         if (newTaskContent !== '') {
             setTaskId(taskId + 1);
             setNewTaskContent('');
-            setTaskItems([...taskItems, [newTaskContent, taskId]])
-            taskList([...taskItems, [newTaskContent, taskId]]);
+            setTaskItems([...taskItems, [newTaskContent, taskId, false]])
+            taskList([...taskItems, [newTaskContent, taskId, false]]);
         }
     }
 

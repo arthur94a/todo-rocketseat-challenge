@@ -3,25 +3,29 @@ import { Task } from './Task'
 import iconClipboard from '../assets/svg/clipboard.svg'
 import styles from './DisplayTasks.module.css'
 
-
 interface PropsDisplayTasks {
-    taskData: [string, number][],
+    taskData: [string, number, boolean][],
     deleteTask: (idTask: number) => void,
+    completeTask: (idTask: number) => void,
 }
 
-export function DisplayTasks({ taskData, deleteTask }: PropsDisplayTasks) {
+export function DisplayTasks({ taskData, deleteTask, completeTask }: PropsDisplayTasks) {
     const [taskCount, setTaskCount] = useState(0);
     const [taskCompleteCount, setTaskCompleteCount] = useState(0);
     const [isTasksEmpty, setIsTaskEmpty] = useState(true);
 
     useEffect(() => {
         setTaskCount(taskData.length)
+        setTaskCompleteCount(taskData.filter(task => task[2] === true).length)
         setIsTaskEmpty(taskData.length !== 0 ? false : true)
     }, [taskData])
 
     function getDeleteTaskId(idTask: number) {
-        console.log('idTask', idTask)
         deleteTask(idTask)
+    }
+
+    function getTaskCompleteStatus(idTask: number) {
+        completeTask(idTask)
     }
 
     return (
@@ -33,7 +37,17 @@ export function DisplayTasks({ taskData, deleteTask }: PropsDisplayTasks) {
                 </div>
                 <div className={styles.tasks_completed}>
                     <p>Concluidas</p>
-                    <span>{taskCompleteCount}</span>
+                    <span>
+                    {taskCount !== 0 ? (
+                        <>
+                            {taskCompleteCount} de {taskCount}
+                        </>
+                    ) : (
+                        <>
+                            {taskCompleteCount}
+                        </>
+                    )}
+                    </span>
                 </div>
             </header>
 
@@ -44,7 +58,13 @@ export function DisplayTasks({ taskData, deleteTask }: PropsDisplayTasks) {
                             taskData.map(data => {
                                 if (data[0] !== '') {
                                     return (
-                                        <Task content={data[0]} key={data[1]} id={data[1]} getDeleteTaskId={getDeleteTaskId}/>
+                                        <Task 
+                                            content={data[0]}
+                                            key={data[1]}
+                                            id={data[1]}
+                                            getDeleteTaskId={getDeleteTaskId}
+                                            getTaskCompleteStatus={getTaskCompleteStatus}
+                                        />
                                     )
                                 }
                             })

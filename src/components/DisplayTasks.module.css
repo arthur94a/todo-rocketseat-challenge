@@ -1,6 +1,7 @@
 .display {
     display: flex;
     flex-direction: column;
+    padding: 0 16px;
     width: 100%;
     max-width: 46rem;
     justify-content: center;
@@ -16,7 +17,7 @@
 .task_count_container > div > span {
     border-radius: 99px;
     margin-left: 0.5rem;
-    width: 1.563rem;
+    min-width: 1.563rem;
     padding: 2px 8px;
     text-align: center;
     font-size: 0.75rem;

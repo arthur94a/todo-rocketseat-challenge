@@ -1,5 +1,6 @@
 .form_container {
     display: flex;
+    padding: 0 16px;
     width: 100%;
     max-width: 46rem;
     gap: 0.5rem;

@@ -1,13 +1,17 @@
+import { useState } from 'react'
 import iconTrash from '../assets/svg/trash.svg'
+import iconChecked from '../assets/svg/checked.svg'
 import styles from './Task.module.css'
 
 interface PropsTask {
     content: string,
     id?: number,
     getDeleteTaskId: (idTask: number) => void,
+    getTaskCompleteStatus: (idTask: number) => void,
 }
 
-export function Task({ content, id, getDeleteTaskId }: PropsTask) {
+export function Task({ content, id, getDeleteTaskId, getTaskCompleteStatus}: PropsTask) {
+    const [isComplete, setIsComplete] = useState(false);
 
     function handleDeleteTask() {
         if (id !== undefined) {
@@ -15,10 +19,29 @@ export function Task({ content, id, getDeleteTaskId }: PropsTask) {
         }
     }
 
+    function handleToggleCompleteTask() {
+        if (id !== undefined) {
+            getTaskCompleteStatus(id)
+            setIsComplete(!isComplete)
+        }
+    }
+
     return (
-        <article className={styles.task}>
-            <button className={styles.btn_checkbox}>
-                <span className={styles.checkbox}/>
+        <article className={`${styles.task} ${isComplete && styles.complete}`}>
+            <button 
+                className={styles.btn_checkbox}
+                onClick={handleToggleCompleteTask}
+            >
+
+                {isComplete ? (
+                    <>
+                        <img src={iconChecked} alt="complete" />
+                    </>
+                ) : (
+                    <>
+                        <span className={styles.checkbox}/>
+                    </>
+                )}
             </button>
             <p className={styles.content}>{content}</p>
             <button
