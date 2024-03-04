@@ -1,15 +1,33 @@
-import { FormEvent, ChangeEvent } from 'react';
+import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
 import styles from './InputTask.module.css'
 
-export function InputTask() {
+interface InputTaskProps {
+    taskList: (x: [string, number][]) => void,
+    attTaskList: [string, number][],
+}
 
-    function handleNewTaskValue(event: ChangeEvent<HTMLInputElement>) {
-        console.log(event.target.value);
+export function InputTask({ taskList, attTaskList }: InputTaskProps) {
+    const [taskId, setTaskId] = useState<number>(1)
+    const [taskItems, setTaskItems] = useState<[string, number][]>([]);
+    const [newTaskContent, setNewTaskContent] = useState<string>('');
+
+    useEffect(() => {
+        setTaskItems(attTaskList)
+    }, [attTaskList])
+
+    function handleNewTaskValueChange(event: ChangeEvent<HTMLInputElement>) {
+        setNewTaskContent(event.target.value);
     }
 
     function handleSubmitTask(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log('submited');
+        
+        if (newTaskContent !== '') {
+            setTaskId(taskId + 1);
+            setNewTaskContent('');
+            setTaskItems([...taskItems, [newTaskContent, taskId]])
+            taskList([...taskItems, [newTaskContent, taskId]]);
+        }
     }
 
     return (
@@ -17,7 +35,8 @@ export function InputTask() {
             <input
                 className={styles.input_task}
                 placeholder="Adicione uma nova taréfa"
-                onChange={handleNewTaskValue}
+                onChange={handleNewTaskValueChange}
+                value={newTaskContent}
             />
             <button type="submit" className={styles.button_submit}>
                 Criar
