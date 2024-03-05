@@ -1,5 +1,6 @@
 import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
 import styles from './InputTask.module.css'
+import IconPlus from '../assets/svg/plus.svg'
 
 interface InputTaskProps {
     taskList: (x: [string, string, boolean][]) => void,
@@ -43,7 +44,7 @@ export function InputTask({ taskList, attTaskList }: InputTaskProps) {
             />
             <button type="submit" className={styles.button_submit}>
                 Criar
-                <img src='/src/assets/svg/plus.svg' alt='+'/>
+                <img src={IconPlus} alt='+'/>
             </button>
         </form>
     );
