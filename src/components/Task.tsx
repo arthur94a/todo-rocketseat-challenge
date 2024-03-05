@@ -17,18 +17,17 @@ export function Task({ content, id, getDeleteTaskId, getTaskCompleteStatus}: Pro
         try {
             const tasksStorage = localStorage.getItem('taskList')
             if (tasksStorage !== null) {
-              const taskParse = JSON.parse(tasksStorage)
-              taskParse.map((task: [string, string, boolean]) => {
-                if (task[1] === id) {
-                    setIsComplete(task[2])
-                    console.log(task[1], id)
-                }
-              })
+                const taskParse = JSON.parse(tasksStorage)
+                taskParse.map((task: [string, string, boolean]) => {
+                    if (task[1] === id) {
+                        setIsComplete(task[2])
+                    }
+                })
             }
-          } 
-          catch(error) {
+        } 
+        catch(error) {
             console.log(error)
-          }
+        }
     },[id])
 
     function handleDeleteTask() {
