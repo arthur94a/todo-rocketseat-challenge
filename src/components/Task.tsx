@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import iconTrash from '../assets/svg/trash.svg'
 import iconChecked from '../assets/svg/checked.svg'
 import styles from './Task.module.css'
@@ -12,6 +12,24 @@ interface PropsTask {
 
 export function Task({ content, id, getDeleteTaskId, getTaskCompleteStatus}: PropsTask) {
     const [isComplete, setIsComplete] = useState(false);
+
+    useEffect(() => {
+        try {
+            const tasksStorage = localStorage.getItem('taskList')
+            if (tasksStorage !== null) {
+              const taskParse = JSON.parse(tasksStorage)
+              taskParse.map((task: [string, string, boolean]) => {
+                if (task[1] === id) {
+                    setIsComplete(task[2])
+                    console.log(task[1], id)
+                }
+              })
+            }
+          } 
+          catch(error) {
+            console.log(error)
+          }
+    },[id])
 
     function handleDeleteTask() {
         if (id !== undefined) {
