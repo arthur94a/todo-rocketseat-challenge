@@ -6,6 +6,8 @@ A project exploring TypeScript and Vite to implement a feature that allow the us
 
 ![take your tasks](./src/assets/overview.webp)
 
+### [Click to take a look](https://todo-rocketseat-challenge-tau.vercel.app/)
+
 ## Installation
 
 requires [Node.js](https://nodejs.org/) v18+ to run.
